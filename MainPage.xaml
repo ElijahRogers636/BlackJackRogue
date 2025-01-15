@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BlackJackRogue.MainPage"
+             BackgroundImageSource="titlepagebackground.png">
+
+    <VerticalStackLayout Padding="30" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
+        <!-- Title at the top and centered -->
+        <Border Stroke="DarkRed" StrokeThickness="10" BackgroundColor="White">
+            <Label Text="BlackJack Rogue" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center"
+               FontSize="65" 
+               TextColor="DarkRed"
+               FontAttributes="Bold"
+               FontFamily="Comic Sans MS"
+               BackgroundColor="Black"/>
+        </Border>
+
+        <!-- Two buttons next to each other under the title New Game and How To Play -->
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <Border Stroke="DarkRed" StrokeThickness="2" BackgroundColor="DimGray">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <Button Text="New Game" 
+                    WidthRequest="200"
+                    HeightRequest="60"
+                    FontSize="20"
+                    FontFamily="Comic Sans MS"
+                    FontAttributes="Bold"
+                    BackgroundColor="DimGray"
+                    TextColor="DarkRed"
+                    CornerRadius="10"
+                    Opacity="0.75"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Clicked="OnNewGameButtonClicked"/>
+            </Border>
+
+            <Border Stroke="DarkRed" StrokeThickness="2" BackgroundColor="DimGray">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <Button Text="How To Play" 
+                    WidthRequest="200"
+                    HeightRequest="60"
+                    FontSize="20"
+                    FontFamily="Comic Sans MS"
+                    FontAttributes="Bold"
+                    BackgroundColor="DimGray"
+                    TextColor="DarkRed"
+                    CornerRadius="10"
+                    Opacity="0.75"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Clicked="OnHowToPlayButtonClicked"/>
+            </Border>
+
+        </HorizontalStackLayout>
+
+        <!-- Exit Button under the two buttons centered -->
+        <Border Stroke="DarkRed" StrokeThickness="2" BackgroundColor="DimGray" WidthRequest="204">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <Button
+                Text="Exit" 
+                WidthRequest="200"
+                HeightRequest="60"
+                FontSize="20"
+                FontFamily="Comic Sans MS"
+                FontAttributes="Bold"
+                BackgroundColor="DimGray"
+                TextColor="DarkRed" 
+                CornerRadius="10"
+                Opacity="0.75"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                Clicked="OnExitButtonClicked"/>
+        </Border>
+    </VerticalStackLayout>
+
+
+</ContentPage>
