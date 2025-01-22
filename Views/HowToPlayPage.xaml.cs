@@ -1,4 +1,4 @@
-namespace BlackJackRogue;
+namespace BlackJackRogue.Views;
 
 public partial class HowToPlayPage : ContentPage
 {

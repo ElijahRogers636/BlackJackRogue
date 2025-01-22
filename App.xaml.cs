@@ -1,4 +1,6 @@
-﻿namespace BlackJackRogue
+﻿using BlackJackRogue.Views;
+
+namespace BlackJackRogue
 {
     public partial class App : Application
     {

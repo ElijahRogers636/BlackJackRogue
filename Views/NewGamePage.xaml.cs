@@ -1,5 +1,5 @@
 
-namespace BlackJackRogue
+namespace BlackJackRogue.Views
 {
     public partial class NewGamePage : ContentPage
     {
