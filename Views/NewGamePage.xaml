@@ -2,11 +2,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BlackJackRogue.Views.NewGamePage">
-    <VerticalStackLayout Padding="30" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
-        <Label Text="Welcome to the New Game Page" 
-               HorizontalOptions="Center" 
-               VerticalOptions="Center"
-               FontSize="24" 
-               TextColor="Black"/>
-    </VerticalStackLayout>
+    <Grid Padding="30" RowSpacing="20" ColumnSpacing="20">
+        <!-- Define the row and column definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Add content to the grid cells -->
+        <Label Text="Top Left End" Grid.Row="0" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" />
+        <Label Text="Top Middle" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
+        <Label Text="Top Right Start" Grid.Row="0" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" />
+
+        <Label Text="Middle Left End" Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" />
+        <Label Text="Center" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
+        <Label Text="Middle Right Start" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" />
+
+        <Label Text="Bottom Left End" Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" />
+        <Label Text="Bottom Middle" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
+        <Label Text="Bottom Right Start" Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" />
+    </Grid>
 </ContentPage>
