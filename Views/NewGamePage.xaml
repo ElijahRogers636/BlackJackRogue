@@ -46,9 +46,11 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="275" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="275" />
         </Grid.ColumnDefinitions>
 
         <!-- Dealer Health column 0 row 0 -->
@@ -76,7 +78,7 @@
         </Frame>
 
         <!-- Two vertical buttons in column 2, row 0 Beck to menu and how to play buttons-->
-        <Frame Grid.Row="0" Grid.Column="2" >
+        <Frame Grid.Row="0" Grid.Column="5" >
             <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center" Spacing="20" Padding="30" Scale="1.2" >
                 <Button Text="BACK TO MENU" Clicked="OnBacktoMainPageButtonClicked"/>
                 <Button Text="HOW TO PLAY" Clicked="OnHowToPlayButtonClicked"/>
@@ -85,7 +87,7 @@
 
 
         <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
-        <Frame Grid.Row="1" Grid.Column="1" MaximumWidthRequest="350">
+        <Frame Grid.Row="1" Grid.Column="2" MaximumWidthRequest="350">
             <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
                 <Entry Placeholder="Enter your bet" 
                        PlaceholderColor="DarkRed"/>
@@ -121,8 +123,8 @@
         </Frame>
 
         <!-- Three vertical buttons in column 2, row 2 Perk buttons-->
-        <Frame Grid.Row="2" Grid.Column="2">
-            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="18">
+        <Frame Grid.Row="2" Grid.Column="5">
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" Spacing="18">
                 <Label Text="PERKS" 
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
@@ -134,7 +136,7 @@
         </Frame>
 
         <!-- Dealer Hand grid row 0 column 1 -->
-        <Frame Grid.Row="0" Grid.Column="1">
+        <Frame Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
             <VerticalStackLayout Grid.Row="0" Grid.Column="1">
                 <Label Text="DEALER HAND"
                        TextColor="DarkRed"
@@ -154,7 +156,7 @@
         </Frame>
 
         <!-- Player Hand with HIT and STAY buttons, grid row 0 column 1 -->
-        <Frame Grid.Row="2" Grid.Column="1">
+        <Frame Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
             <VerticalStackLayout Grid.Row="2" Grid.Column="1" >
                 <Label Text="PLAYER HAND"
                        TextColor="DarkRed" 
@@ -173,6 +175,9 @@
             </VerticalStackLayout>
         </Frame>
 
-        
+        <!-- Player Hand with HIT and STAY buttons, grid row 0 column 1 -->
+        <Button Grid.Row="1" Grid.Column="1" Text="HIT" HorizontalOptions="FillAndExpand" />
+        <Button Grid.Row="1" Grid.Column="3" Text="STAY" HorizontalOptions="FillAndExpand" />
+
     </Grid>
 </ContentPage>
