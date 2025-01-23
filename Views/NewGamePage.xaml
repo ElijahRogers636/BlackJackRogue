@@ -7,8 +7,9 @@
         <ResourceDictionary>
             <!-- Define a style for buttons -->
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="DarkRed" />
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BorderColor" Value="DarkRed"/>
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="DarkRed" />
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="Padding" Value="10,5" />
@@ -27,7 +28,8 @@
             </Style>
             <!-- Define a style for frames -->
             <Style TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="DarkGrey" />
+                <Setter Property="BorderColor" Value="DarkRed" />
+                <Setter Property="BackgroundColor" Value="#99000000" />
                 <Setter Property="CornerRadius" Value="30" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
@@ -40,7 +42,7 @@
         <!-- Define the row and column definitions -->
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="155" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -51,45 +53,77 @@
 
         <!-- Dealer Health column 0 row 0 -->
         <Frame Grid.Row="0" Grid.Column="0">
-            <Label Text="Dealer Health" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" 
-                   TextColor="White" 
-                   FontSize="24"/>
+            <VerticalStackLayout HeightRequest="150" Spacing="15">
+                <Label Text="DEALER HEALTH" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       TextColor="DarkRed" 
+                       FontSize="24"/>
+                <ProgressBar x:Name="DealerHealthBar" 
+                             Progress="1" 
+                             HorizontalOptions="FillAndExpand" 
+                             VerticalOptions="Center" 
+                             HeightRequest="20"
+                             ScaleY="5"
+                             BackgroundColor="LightGray" 
+                             ProgressColor="DarkRed"/>
+                <Label x:Name="DealerHealthLabel"
+                       Text="1000 / 1000"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30"/>
+            </VerticalStackLayout>
         </Frame>
-        <Label Text="Dealer Image" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Two vertical buttons in column 2, row 0 Beck to menu and how to play buttons-->
         <Frame Grid.Row="0" Grid.Column="2" >
             <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center" Spacing="20" Padding="30" Scale="1.2" >
-                <Button Text="Back To Menu" Clicked="OnBacktoMainPageButtonClicked"/>
-                <Button Text="How To Play" Clicked="OnHowToPlayButtonClicked"/>
+                <Button Text="BACK TO MENU" Clicked="OnBacktoMainPageButtonClicked"/>
+                <Button Text="HOW TO PLAY" Clicked="OnHowToPlayButtonClicked"/>
             </VerticalStackLayout>
         </Frame>
 
 
         <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
-        <Frame Grid.Row="1" Grid.Column="1" MaximumWidthRequest="300">
+        <Frame Grid.Row="1" Grid.Column="1" MaximumWidthRequest="350">
             <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
-                <Entry Placeholder="Enter your bet"/>
-                <Button Text="Place Bet" />
+                <Entry Placeholder="Enter your bet" 
+                       PlaceholderColor="DarkRed"/>
+                <Button Text="PLACE BET" />
+                <Label Text="CURRENT BET: 0" 
+                       HorizontalOptions="Center"
+                       FontSize="18"/>
             </VerticalStackLayout>
         </Frame>
 
         <!-- Player health column 0 row 2-->
         <Frame Grid.Row="2" Grid.Column="0">
-            <Label Text="Player Health" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" 
-                   TextColor="White" 
-                   FontSize="24"/>
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" HeightRequest="150" Spacing="15">
+                <Label Text="PLAYER HEALTH" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       TextColor="DarkRed" 
+                       FontSize="24"/>
+                <ProgressBar x:Name="PlayerHealthBar" 
+                             Progress="1" 
+                             HorizontalOptions="FillAndExpand" 
+                             VerticalOptions="Center" 
+                             HeightRequest="20"
+                             ScaleY="5"
+                             BackgroundColor="LightGray" 
+                             ProgressColor="DarkRed"/>
+                <Label x:Name="PlayerHealthLabel"
+                       Text="1000 / 1000"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="30" />
+            </VerticalStackLayout>
         </Frame>
-        <Label Text="Player Image" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
 
         <!-- Three vertical buttons in column 2, row 2 Perk buttons-->
         <Frame Grid.Row="2" Grid.Column="2">
-            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="20">
-                <Label Text="Perks" 
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="18">
+                <Label Text="PERKS" 
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
                        FontSize="35"/>
@@ -98,5 +132,47 @@
                 <Button Text="Perk 3 Bind" />
             </VerticalStackLayout>
         </Frame>
+
+        <!-- Dealer Hand grid row 0 column 1 -->
+        <Frame Grid.Row="0" Grid.Column="1">
+            <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                <Label Text="DEALER HAND"
+                       TextColor="DarkRed"
+                       FontSize="24" 
+                       HorizontalOptions="Center"/>
+                <CollectionView ItemsSource="{Binding Cards}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal" Span="3" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}" HeightRequest="100" WidthRequest="100"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Player Hand with HIT and STAY buttons, grid row 0 column 1 -->
+        <Frame Grid.Row="2" Grid.Column="1">
+            <VerticalStackLayout Grid.Row="2" Grid.Column="1" >
+                <Label Text="PLAYER HAND"
+                       TextColor="DarkRed" 
+                       FontSize="24" 
+                       HorizontalOptions="Center"/>
+                <CollectionView ItemsSource="{Binding Cards}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal" Span="3" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}" HeightRequest="100" WidthRequest="100"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+
+        
     </Grid>
 </ContentPage>

@@ -7,14 +7,10 @@
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<NewGamePage, string>(this, "UpdateNewGameButtonText", (sender, arg) =>
-            {
-                NewGameButton.Text = arg;
-            });
         }
 
         //Button to navigate to new game page
-        private async void OnNewGameButtonClicked(object sender, EventArgs e)
+        private async void OnEnterGameButtonClicked(object sender, EventArgs e)
         {
             if (sender is Button button)
             {

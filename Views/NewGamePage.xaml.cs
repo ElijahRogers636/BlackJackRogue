@@ -19,8 +19,6 @@ namespace BlackJackRogue.Views
 
         private async void OnBacktoMainPageButtonClicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "UpdateNewGameButtonText", "Continue");
-
             await Shell.Current.GoToAsync("//MainPage");
         }
     }
