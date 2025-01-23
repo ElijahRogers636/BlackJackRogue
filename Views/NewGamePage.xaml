@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BlackJackRogue.Views.NewGamePage">
+             x:Class="BlackJackRogue.Views.NewGamePage"
+             BackgroundImageSource="newgamebackground.png">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Define a style for buttons -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="DarkRed" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+            <!-- Define a style for entry boxes -->
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+            <!-- Define a style for frames -->
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="DarkGrey" />
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Padding" Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid Padding="30" RowSpacing="20" ColumnSpacing="20">
         <!-- Define the row and column definitions -->
         <Grid.RowDefinitions>
@@ -10,22 +44,59 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Add content to the grid cells -->
-        <Label Text="Top Left End" Grid.Row="0" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" />
-        <Label Text="Top Middle" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
-        <Label Text="Top Right Start" Grid.Row="0" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" />
+        <!-- Dealer Health column 0 row 0 -->
+        <Frame Grid.Row="0" Grid.Column="0">
+            <Label Text="Dealer Health" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   TextColor="White" 
+                   FontSize="24"/>
+        </Frame>
+        <Label Text="Dealer Image" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
 
-        <Label Text="Middle Left End" Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" />
-        <Label Text="Center" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
-        <Label Text="Middle Right Start" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" />
+        <!-- Two vertical buttons in column 2, row 0 Beck to menu and how to play buttons-->
+        <Frame Grid.Row="0" Grid.Column="2" >
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center" Spacing="20" Padding="30" Scale="1.2" >
+                <Button Text="Back To Menu" Clicked="OnBacktoMainPageButtonClicked"/>
+                <Button Text="How To Play" Clicked="OnHowToPlayButtonClicked"/>
+            </VerticalStackLayout>
+        </Frame>
 
-        <Label Text="Bottom Left End" Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" />
-        <Label Text="Bottom Middle" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
-        <Label Text="Bottom Right Start" Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" />
+
+        <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
+        <Frame Grid.Row="1" Grid.Column="1" MaximumWidthRequest="300">
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Entry Placeholder="Enter your bet"/>
+                <Button Text="Place Bet" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Player health column 0 row 2-->
+        <Frame Grid.Row="2" Grid.Column="0">
+            <Label Text="Player Health" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   TextColor="White" 
+                   FontSize="24"/>
+        </Frame>
+        <Label Text="Player Image" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" />
+
+        <!-- Three vertical buttons in column 2, row 2 Perk buttons-->
+        <Frame Grid.Row="2" Grid.Column="2">
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="20">
+                <Label Text="Perks" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       FontSize="35"/>
+                <Button Text="Perk 1 Bind" />
+                <Button Text="Perk 2 Bind" />
+                <Button Text="Perk 3 Bind" />
+            </VerticalStackLayout>
+        </Frame>
     </Grid>
 </ContentPage>

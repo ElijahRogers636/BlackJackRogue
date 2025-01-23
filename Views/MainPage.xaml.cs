@@ -6,6 +6,11 @@
         public MainPage()
         {
             InitializeComponent();
+
+            MessagingCenter.Subscribe<NewGamePage, string>(this, "UpdateNewGameButtonText", (sender, arg) =>
+            {
+                NewGameButton.Text = arg;
+            });
         }
 
         //Button to navigate to new game page
@@ -25,7 +30,7 @@
             if (sender is Button button)
             {
 
-                // Navigate to the NewGamePage
+                // Navigate to the HowToPlayPage
                 await Navigation.PushAsync(new HowToPlayPage());
             }
         }

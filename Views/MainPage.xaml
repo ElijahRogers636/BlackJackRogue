@@ -23,7 +23,8 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
-                <Button Text="New Game" 
+                <Button x:Name="NewGameButton"
+                    Text="New Game" 
                     WidthRequest="200"
                     HeightRequest="60"
                     FontSize="20"
@@ -42,7 +43,8 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
-                <Button Text="How To Play" 
+                <Button  
+                    Text="How To Play" 
                     WidthRequest="200"
                     HeightRequest="60"
                     FontSize="20"

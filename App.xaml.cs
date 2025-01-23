@@ -10,5 +10,18 @@ namespace BlackJackRogue
 
             MainPage = new AppShell();
         }
+        protected override Window CreateWindow(IActivationState activationState)
+        {
+            var window = base.CreateWindow(activationState);
+
+            // Set the minimum window size
+            const int minWidth = 1200;
+            const int minHeight = 850;
+
+            window.MinimumWidth = minWidth;
+            window.MinimumHeight = minHeight;
+
+            return window;
+        }
     }
 }
