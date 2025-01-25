@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlackJackRogue.Models
 {
-    class Dealer : Hand
+    public class Dealer : Hand
     {
-        public int DealerHealth { get; set; }
+        public string Name { get; set; } = String.Empty;
     }
 }

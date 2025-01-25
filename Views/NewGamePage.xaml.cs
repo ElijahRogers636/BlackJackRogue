@@ -1,3 +1,4 @@
+using BlackJackRogue.Models.ViewModels;
 
 namespace BlackJackRogue.Views
 {
@@ -6,8 +7,10 @@ namespace BlackJackRogue.Views
         public NewGamePage()
         {
             InitializeComponent();
-        }
 
+            BindingContext = new NewGameViewModel();
+        }
+        // Navigates to the howtoplay page
         private async void OnHowToPlayButtonClicked(object sender, EventArgs e)
         {
             if (sender is Button button)
@@ -17,6 +20,7 @@ namespace BlackJackRogue.Views
             }
         }
 
+        // Returns user to Main Menu
         private async void OnBacktoMainPageButtonClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//MainPage");

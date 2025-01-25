@@ -2,10 +2,48 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BlackJackRogue.Views.HowToPlayPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome How to play page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center" Margin="30">
+            <Label 
+                Text="HOW TO PLAY"
+                TextColor="DarkRed"
+                FontSize="40"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Label 
+                Text="GAMEPLAY LOOP"
+                TextColor="Aqua"
+                FontSize="30"
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand" 
+                Margin="40,0,0,0"/>
+            <Label 
+                Text="BETTING"
+                TextColor="Aqua"
+                FontSize="30"
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand" 
+                Margin="40,0,0,0"/>
+            <Label 
+                Text="PLAYER TURN"
+                TextColor="Aqua"
+                FontSize="30"
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand" 
+                Margin="40,0,0,0"/>
+            <Label 
+                Text="DEALER TURN"
+                TextColor="Aqua"
+                FontSize="30"
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand" 
+                Margin="40,0,0,0"/>
+            <Label 
+                Text="PERKS"
+                TextColor="DarkRed"
+                FontSize="40"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
