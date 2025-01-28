@@ -29,11 +29,13 @@ namespace BlackJackRogue.Models.ViewModels
             DealerHealthPoints = gameDealer.CurrHealthPoints;
             PlayerHealthBar = gamePlayer.HealthBar;
             DealerHealthBar = gameDealer.HealthBar;
+            PlayerCurrentCards = gamePlayer.CurrentCards;
+            DealerCurrentCards = gameDealer.CurrentCards;
             PlayerHealthBarText = $"{PlayerHealthPoints} / {gamePlayer.TotalHealthPoints}";
             DealerHealthBarText = $"{DealerHealthPoints} / {gameDealer.TotalHealthPoints}";
             CurrentBetText = $"CURRENT BET: {gamePlayer.CurrentBet}";
 
-            // Shuffle the deck
+            // Initial Deck Shuffle
             gameDeck.ShuffleDeck();
         }
 
@@ -54,6 +56,9 @@ namespace BlackJackRogue.Models.ViewModels
         [ObservableProperty]
         private string currentBetText;
 
+        [ObservableProperty]
+        private ObservableCollection<Card> playerCurrentCards;
+
         // <---------------------------------------Dealer Properties---------------------------------------------->
         [ObservableProperty]
         private int dealerHealthPoints;
@@ -63,6 +68,9 @@ namespace BlackJackRogue.Models.ViewModels
 
         [ObservableProperty]
         private string dealerHealthBarText;
+
+        [ObservableProperty]
+        private ObservableCollection<Card> dealerCurrentCards;
 
         // <---------------------------------------Commands---------------------------------------------->
         // Updates the player's health values
@@ -130,6 +138,9 @@ namespace BlackJackRogue.Models.ViewModels
             // Logic to place a bet
             gamePlayer.CurrentBet = PlayerCurrentBet;
             CurrentBetText = $"CURRENT BET: {gamePlayer.CurrentBet}";
+
+            // Deal initial cards
+            DealInitialCards();
         }
 
         // Shuffle Deck Command
@@ -141,9 +152,24 @@ namespace BlackJackRogue.Models.ViewModels
 
         // <---------------------------------------Methods---------------------------------------------->
 
+        // Deal Initial Cards Method
+        private void DealInitialCards()
+        {
+            if (gameDeck.ShuffledCardDeck.Count >= 4)
+            {
+                // Deal two cards to the dealer and player
+                DealerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
+                PlayerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
+                DealerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
+                PlayerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
 
+            }
+            else
+            {
+                // Handle the case where there are not enough cards to deal
+                CurrentBetText = "Not enough cards to deal.";
+            }
 
-        // <---------------------------------------Events---------------------------------------------->
-
+        }
     }
 }

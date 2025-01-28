@@ -149,6 +149,26 @@
                        TextColor="DarkRed"
                        FontSize="24" 
                        HorizontalOptions="Center"/>
+                <CollectionView ItemsSource="{Binding DealerCurrentCards}" 
+                                ItemsLayout="HorizontalList"
+                                HorizontalScrollBarVisibility="Always"
+                                Margin="0,15">
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate x:DataType="models:Card">
+                            <Frame BorderColor="DarkRed" 
+                                   Padding="5" Margin="5"  
+                                   WidthRequest="90" 
+                                   HeightRequest="130" 
+                                   CornerRadius="10" 
+                                   BackgroundColor="Black">
+                                <HorizontalStackLayout>
+                                    <Image Source="{Binding Icon}" WidthRequest="80" HeightRequest="110" />
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="PLAYER TOTAL: " HorizontalOptions="StartAndExpand" FontSize="20" Margin="8"/>
             </VerticalStackLayout>
         </Frame>
 
@@ -159,6 +179,27 @@
                        TextColor="DarkRed" 
                        FontSize="24" 
                        HorizontalOptions="Center"/>
+                <CollectionView ItemsSource="{Binding PlayerCurrentCards}" 
+                                ItemsLayout="HorizontalList"
+                                HorizontalScrollBarVisibility="Always" 
+                                Margin="0,15">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Card">
+                            <Frame BorderColor="DarkRed" 
+                                   Padding="5" 
+                                   Margin="5" 
+                                   WidthRequest="90" 
+                                   HeightRequest="130" 
+                                   CornerRadius="10" 
+                                   BackgroundColor="Black">
+                                <HorizontalStackLayout>
+                                    <Image Source="{Binding Icon}" WidthRequest="80" HeightRequest="110" />
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="PLAYER TOTAL: " HorizontalOptions="StartAndExpand" FontSize="20" Margin="8"/>
             </VerticalStackLayout>
         </Frame>
 
