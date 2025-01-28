@@ -62,7 +62,6 @@
                 <Label Text="DEALER HEALTH" 
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
-                       TextColor="DarkRed" 
                        FontSize="24"/>
                 <ProgressBar x:Name="DealerHealthBar" 
                              Progress="{Binding DealerHealthBar}" 
@@ -79,7 +78,15 @@
                        FontSize="30"/>
             </VerticalStackLayout>
         </Frame>
-
+        
+        <!-- Player and Dealer card value totals row 1 column 0-->
+        <Frame Grid.Row="1" Grid.Column="0">
+            <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center">
+                <Label Text="{Binding DealerCurrentCardValueSum, StringFormat='DEALER TOTAL: {0}'}" HorizontalOptions="StartAndExpand" FontSize="25" Margin="8"/>
+                <Label Text="{Binding PlayerCurrentCardValueSum, StringFormat='PLAYER TOTAL: {0}'}" HorizontalOptions="StartAndExpand" FontSize="25" Margin="8"/>
+            </VerticalStackLayout>
+        </Frame>
+        
         <!-- Two vertical buttons in column 2, row 0 Beck to menu and how to play buttons-->
         <Frame Grid.Row="0" Grid.Column="5" >
             <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center" Spacing="20" Padding="30" Scale="1.2" >
@@ -87,7 +94,11 @@
                 <Button Text="HOW TO PLAY" />
             </VerticalStackLayout>
         </Frame>
-
+        
+        <!-- Next Round Button to start the next round row 1 column 5-->
+        <Frame Grid.Row="1" Grid.Column="5" >
+            <Button Text="NEXT ROUND" Margin="25"/>
+        </Frame>
 
         <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
         <Frame Grid.Row="1" Grid.Column="2" MaximumWidthRequest="350">
@@ -111,7 +122,6 @@
                 <Label Text="PLAYER HEALTH" 
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
-                       TextColor="DarkRed" 
                        FontSize="24"/>
                 <ProgressBar x:Name="PlayerHealthBar" 
                              Progress="{Binding PlayerHealthBar}" 
@@ -146,7 +156,6 @@
         <Frame Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
             <VerticalStackLayout Grid.Row="0" Grid.Column="1">
                 <Label Text="{Binding GameDealer.Name}"
-                       TextColor="DarkRed"
                        FontSize="24" 
                        HorizontalOptions="Center"/>
                 <CollectionView ItemsSource="{Binding DealerCurrentCards}" 
@@ -157,18 +166,17 @@
                         <DataTemplate x:DataType="models:Card">
                             <Frame BorderColor="DarkRed" 
                                    Padding="5" Margin="5"  
-                                   WidthRequest="90" 
-                                   HeightRequest="130" 
+                                   WidthRequest="120" 
+                                   HeightRequest="175" 
                                    CornerRadius="10" 
                                    BackgroundColor="Black">
                                 <HorizontalStackLayout>
-                                    <Image Source="{Binding Icon}" WidthRequest="80" HeightRequest="110" />
+                                    <Image Source="{Binding Icon}" WidthRequest="110" HeightRequest="150" />
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <Label Text="PLAYER TOTAL: " HorizontalOptions="StartAndExpand" FontSize="20" Margin="8"/>
             </VerticalStackLayout>
         </Frame>
 
@@ -176,7 +184,6 @@
         <Frame Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
             <VerticalStackLayout Grid.Row="2" Grid.Column="1" >
                 <Label Text="PLAYER HAND"
-                       TextColor="DarkRed" 
                        FontSize="24" 
                        HorizontalOptions="Center"/>
                 <CollectionView ItemsSource="{Binding PlayerCurrentCards}" 
@@ -188,24 +195,23 @@
                             <Frame BorderColor="DarkRed" 
                                    Padding="5" 
                                    Margin="5" 
-                                   WidthRequest="90" 
-                                   HeightRequest="130" 
+                                   WidthRequest="120" 
+                                   HeightRequest="175" 
                                    CornerRadius="10" 
                                    BackgroundColor="Black">
                                 <HorizontalStackLayout>
-                                    <Image Source="{Binding Icon}" WidthRequest="80" HeightRequest="110" />
+                                    <Image Source="{Binding Icon}" WidthRequest="110" HeightRequest="150" />
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <Label Text="PLAYER TOTAL: " HorizontalOptions="StartAndExpand" FontSize="20" Margin="8"/>
             </VerticalStackLayout>
         </Frame>
 
         <!-- Player Hand with HIT and STAY buttons, grid row 0 column 1 -->
-        <Button x:Name="HitButton" Grid.Row="1" Grid.Column="1" Text="HIT" HorizontalOptions="FillAndExpand" Command="{Binding UpdatePlayerHealthCommand}"/>
-        <Button x:Name="StayButton" Grid.Row="1" Grid.Column="3" Text="STAY" HorizontalOptions="FillAndExpand" />
+        <Button x:Name="HitButton" Grid.Row="1" Grid.Column="1" Text="HIT" HorizontalOptions="FillAndExpand" Command="{Binding HitCommand}"/>
+        <Button x:Name="StayButton" Grid.Row="1" Grid.Column="3" Text="STAY" HorizontalOptions="FillAndExpand" Command="{Binding StayCommand}" />
 
     </Grid>
 </ContentPage>

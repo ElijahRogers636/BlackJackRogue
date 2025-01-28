@@ -21,22 +21,33 @@ namespace BlackJackRogue.Models.ViewModels
         {
             gamePerks = new Perks();
             gameDeck = new Deck();
-            gameDealer = new Dealer { Name = "First Dealer", CardValueSum = 0, CurrHealthPoints = 1000, TotalHealthPoints = 1000, CurrentCards = new ObservableCollection<Card>() };
+            gameDealer = new Dealer { Name = "FIRST DEALER", CardValueSum = 0, CurrHealthPoints = 1000, TotalHealthPoints = 1000, CurrentCards = new ObservableCollection<Card>() };
             gamePlayer = new Player { CardValueSum = 0, CurrHealthPoints = 1000, TotalHealthPoints = 1000, CurrentBet = 0, CurrentCards = new ObservableCollection<Card>() };
 
             // Property Initalization
             PlayerHealthPoints = gamePlayer.CurrHealthPoints;
             DealerHealthPoints = gameDealer.CurrHealthPoints;
+
             PlayerHealthBar = gamePlayer.HealthBar;
             DealerHealthBar = gameDealer.HealthBar;
+
             PlayerCurrentCards = gamePlayer.CurrentCards;
             DealerCurrentCards = gameDealer.CurrentCards;
+
+            PlayerCurrentCardValueSum = gamePlayer.CardValueSum;
+            DealerCurrentCardValueSum = gameDealer.CardValueSum;
+
             PlayerHealthBarText = $"{PlayerHealthPoints} / {gamePlayer.TotalHealthPoints}";
             DealerHealthBarText = $"{DealerHealthPoints} / {gameDealer.TotalHealthPoints}";
+
             CurrentBetText = $"CURRENT BET: {gamePlayer.CurrentBet}";
 
             // Initial Deck Shuffle
-            gameDeck.ShuffleDeck();
+            GameDeck.ShuffleDeck();
+
+            // Subscribe to collection changed events to update cardvaluesum
+            PlayerCurrentCards.CollectionChanged += (s, e) => UpdatePlayerCardValueSum();
+            DealerCurrentCards.CollectionChanged += (s, e) => UpdateDealerCardValueSum();
         }
 
         // <---------------------------------------Player Properties---------------------------------------------->
@@ -59,6 +70,9 @@ namespace BlackJackRogue.Models.ViewModels
         [ObservableProperty]
         private ObservableCollection<Card> playerCurrentCards;
 
+        [ObservableProperty]
+        private int playerCurrentCardValueSum;
+
         // <---------------------------------------Dealer Properties---------------------------------------------->
         [ObservableProperty]
         private int dealerHealthPoints;
@@ -72,41 +86,44 @@ namespace BlackJackRogue.Models.ViewModels
         [ObservableProperty]
         private ObservableCollection<Card> dealerCurrentCards;
 
+        [ObservableProperty]
+        private int dealerCurrentCardValueSum;
+
         // <---------------------------------------Commands---------------------------------------------->
         // Updates the player's health values
         [RelayCommand]
         private void UpdatePlayerHealth()
         {
-            gamePlayer.CurrHealthPoints -= gamePlayer.CurrentBet;
+            GamePlayer.CurrHealthPoints -= GamePlayer.CurrentBet;
 
-            if (gamePlayer.CurrHealthPoints < 0)
+            if (GamePlayer.CurrHealthPoints < 0)
             {
-                gamePlayer.CurrHealthPoints = 0;
+                GamePlayer.CurrHealthPoints = 0;
             }
 
             // Update ViewModel properties
-            PlayerHealthPoints = gamePlayer.CurrHealthPoints;
-            PlayerHealthBar = gamePlayer.HealthBar;
+            PlayerHealthPoints = GamePlayer.CurrHealthPoints;
+            PlayerHealthBar = GamePlayer.HealthBar;
 
             // Update combined property text
-            PlayerHealthBarText = $"{PlayerHealthPoints} / {gamePlayer.TotalHealthPoints}";
-            CurrentBetText = $"CURRENT BET: {gamePlayer.CurrentBet}";
+            PlayerHealthBarText = $"{PlayerHealthPoints} / {GamePlayer.TotalHealthPoints}";
+            CurrentBetText = $"CURRENT BET: {GamePlayer.CurrentBet}";
         }
 
         // Updates the dealer's health values
         [RelayCommand]
         private void UpdateDealerHealth()
         {
-            gameDealer.CurrHealthPoints -= 50; // Example value
+            GameDealer.CurrHealthPoints -= 50; // Example value
 
-            if (gameDealer.CurrHealthPoints < 0)
+            if (GameDealer.CurrHealthPoints < 0)
             {
-                gameDealer.CurrHealthPoints = 0;
+                GameDealer.CurrHealthPoints = 0;
             }
 
             // Update ViewModel properties
-            DealerHealthPoints = gameDealer.CurrHealthPoints;
-            DealerHealthBar = gameDealer.HealthBar;
+            DealerHealthPoints = GameDealer.CurrHealthPoints;
+            DealerHealthBar = GameDealer.HealthBar;
 
             // Update combined property text
             DealerHealthBarText = $"{DealerHealthPoints} / {GameDealer.TotalHealthPoints}";
@@ -123,7 +140,7 @@ namespace BlackJackRogue.Models.ViewModels
                 return;
             }
 
-            if (PlayerCurrentBet > gamePlayer.CurrHealthPoints)
+            if (PlayerCurrentBet > GamePlayer.CurrHealthPoints)
             {
                 CurrentBetText = "Cannot exceed current HP.";
                 return;
@@ -136,8 +153,8 @@ namespace BlackJackRogue.Models.ViewModels
             }
 
             // Logic to place a bet
-            gamePlayer.CurrentBet = PlayerCurrentBet;
-            CurrentBetText = $"CURRENT BET: {gamePlayer.CurrentBet}";
+            GamePlayer.CurrentBet = PlayerCurrentBet;
+            CurrentBetText = $"CURRENT BET: {GamePlayer.CurrentBet}";
 
             // Deal initial cards
             DealInitialCards();
@@ -147,21 +164,55 @@ namespace BlackJackRogue.Models.ViewModels
         [RelayCommand]
         private void ShuffleDeck()
         {
-            gameDeck.ShuffleDeck();
+            GameDeck.ShuffleDeck();
+        }
+
+        // Hit Command
+        [RelayCommand]
+        private void Hit()
+        {
+            // Draw a card from the deck
+            if (GameDeck.ShuffledCardDeck.Count > 0)
+            {
+                PlayerCurrentCards.Add(GameDeck.ShuffledCardDeck.Pop());
+            }
+            else
+            {
+                CurrentBetText = "Not enough cards to draw.";
+            }
+        }
+
+        // Stay Command
+        [RelayCommand]
+        private void Stay()
+        {
+            // Dealer draws cards until they have a value of 17 or higher
+            while (DealerCurrentCardValueSum < 17)
+            {
+                if (GameDeck.ShuffledCardDeck.Count > 0)
+                {
+                    DealerCurrentCards.Add(GameDeck.ShuffledCardDeck.Pop());
+                }
+                else
+                {
+                    CurrentBetText = "Not enough cards to draw.";
+                    break;
+                }
+            }
         }
 
         // <---------------------------------------Methods---------------------------------------------->
 
-        // Deal Initial Cards Method
+            // Deal Initial Cards Method
         private void DealInitialCards()
         {
-            if (gameDeck.ShuffledCardDeck.Count >= 4)
+            if (GameDeck.ShuffledCardDeck.Count >= 4)
             {
                 // Deal two cards to the dealer and player
-                DealerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
-                PlayerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
-                DealerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
-                PlayerCurrentCards.Add(gameDeck.ShuffledCardDeck.Pop());
+                DealerCurrentCards.Add(GameDeck.ShuffledCardDeck.Pop());
+                PlayerCurrentCards.Add(GameDeck.ShuffledCardDeck.Pop());
+                DealerCurrentCards.Add(GameDeck.ShuffledCardDeck.Pop());
+                PlayerCurrentCards.Add(GameDeck.ShuffledCardDeck.Pop());
 
             }
             else
@@ -170,6 +221,18 @@ namespace BlackJackRogue.Models.ViewModels
                 CurrentBetText = "Not enough cards to deal.";
             }
 
+        }
+
+        // Update Player Card Value Sum
+        private void UpdatePlayerCardValueSum()
+        {
+            PlayerCurrentCardValueSum = PlayerCurrentCards.Sum(card => card.CardValue);
+        }
+
+        // Update Dealer Card Value Sum
+        private void UpdateDealerCardValueSum()
+        {
+            DealerCurrentCardValueSum = DealerCurrentCards.Sum(card => card.CardValue);
         }
     }
 }
