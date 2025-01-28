@@ -7,24 +7,9 @@ namespace BlackJackRogue.Views
         public NewGamePage()
         {
             InitializeComponent();
-
             BindingContext = new NewGameViewModel();
         }
-        // Navigates to the howtoplay page
-        private async void OnHowToPlayButtonClicked(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                // Navigate to the HowtoPlayPage
-                await Navigation.PushAsync(new HowToPlayPage());
-            }
-        }
-
-        // Returns user to Main Menu
-        private async void OnBacktoMainPageButtonClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//MainPage");
-        }
+        
     }
 }
 
