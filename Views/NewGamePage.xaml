@@ -97,7 +97,7 @@
         
         <!-- Next Round Button to start the next round row 1 column 5-->
         <Frame Grid.Row="1" Grid.Column="5" >
-            <Button Text="NEXT ROUND" Margin="25"/>
+            <Button Text="NEXT ROUND" Margin="25" Command="{Binding ResetGameCommand}" IsEnabled="{Binding IsResetGameEnabled}"/>
         </Frame>
 
         <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
@@ -108,7 +108,7 @@
                        PlaceholderColor="DarkRed"
                        Text="{Binding PlayerCurrentBet, Mode=TwoWay}"
                        Keyboard="Numeric" />
-                <Button Text="PLACE BET" Command="{Binding PlaceBetCommand}"/>
+                <Button Text="PLACE BET" Command="{Binding PlaceBetCommand}" IsEnabled="{Binding IsPlaceBetEnabled}"/>
                 <Label x:Name="CurrentBetLabel" 
                        Text="{Binding CurrentBetText}"
                        HorizontalOptions="Center"
@@ -146,9 +146,9 @@
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
                        FontSize="35"/>
-                <Button x:Name="Perk1Button" Text="temp" />
-                <Button x:Name="Perk2Button" Text="temp" />
-                <Button x:Name="Perk3Button" Text="temp" />
+                <Button x:Name="Perk1Button" Text="temp" IsEnabled="{Binding IsPerkOneEnabled}"/>
+                <Button x:Name="Perk2Button" Text="temp" IsEnabled="{Binding IsPerkTwoEnabled}"/>
+                <Button x:Name="Perk3Button" Text="temp" IsEnabled="{Binding IsPerkThreeEnabled}"/>
             </VerticalStackLayout>
         </Frame>
 
@@ -166,12 +166,12 @@
                         <DataTemplate x:DataType="models:Card">
                             <Frame BorderColor="DarkRed" 
                                    Padding="5" Margin="5"  
-                                   WidthRequest="120" 
+                                   WidthRequest="130" 
                                    HeightRequest="175" 
                                    CornerRadius="10" 
                                    BackgroundColor="Black">
                                 <HorizontalStackLayout>
-                                    <Image Source="{Binding Icon}" WidthRequest="110" HeightRequest="150" />
+                                    <Image Source="{Binding Icon}" WidthRequest="118" HeightRequest="150" />
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>
@@ -195,12 +195,12 @@
                             <Frame BorderColor="DarkRed" 
                                    Padding="5" 
                                    Margin="5" 
-                                   WidthRequest="120" 
+                                   WidthRequest="130" 
                                    HeightRequest="175" 
                                    CornerRadius="10" 
                                    BackgroundColor="Black">
                                 <HorizontalStackLayout>
-                                    <Image Source="{Binding Icon}" WidthRequest="110" HeightRequest="150" />
+                                    <Image Source="{Binding Icon}" WidthRequest="118" HeightRequest="150" />
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>
@@ -210,8 +210,16 @@
         </Frame>
 
         <!-- Player Hand with HIT and STAY buttons, grid row 0 column 1 -->
-        <Button x:Name="HitButton" Grid.Row="1" Grid.Column="1" Text="HIT" HorizontalOptions="FillAndExpand" Command="{Binding HitCommand}"/>
-        <Button x:Name="StayButton" Grid.Row="1" Grid.Column="3" Text="STAY" HorizontalOptions="FillAndExpand" Command="{Binding StayCommand}" />
+        <Button x:Name="HitButton" Grid.Row="1" Grid.Column="1" 
+                Text="HIT" 
+                HorizontalOptions="FillAndExpand" 
+                Command="{Binding HitCommand}" 
+                IsEnabled="{Binding IsHitEnabled}"/>
+        <Button x:Name="StayButton" Grid.Row="1" Grid.Column="3" 
+                Text="STAY" 
+                HorizontalOptions="FillAndExpand" 
+                Command="{Binding StayCommand}" 
+                IsEnabled="{Binding IsStayEnabled}"/>
 
     </Grid>
 </ContentPage>
