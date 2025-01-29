@@ -97,7 +97,11 @@
         
         <!-- Next Round Button to start the next round row 1 column 5-->
         <Frame Grid.Row="1" Grid.Column="5" >
-            <Button Text="NEXT ROUND" Margin="25" Command="{Binding ResetGameCommand}" IsEnabled="{Binding IsResetGameEnabled}"/>
+            <Button Text="NEXT ROUND" 
+                    Margin="25" 
+                    Command="{Binding ResetGameCommand}" 
+                    IsEnabled="{Binding IsResetGameEnabled}"
+                    BackgroundColor="{Binding IsResetGameEnabledIndicator}"/>
         </Frame>
 
         <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
@@ -108,7 +112,10 @@
                        PlaceholderColor="DarkRed"
                        Text="{Binding PlayerCurrentBet, Mode=TwoWay}"
                        Keyboard="Numeric" />
-                <Button Text="PLACE BET" Command="{Binding PlaceBetCommand}" IsEnabled="{Binding IsPlaceBetEnabled}"/>
+                <Button Text="PLACE BET" 
+                        Command="{Binding PlaceBetCommand}" 
+                        IsEnabled="{Binding IsPlaceBetEnabled}" 
+                        BackgroundColor="{Binding IsPlaceBetEnabledIndicator}"/>
                 <Label x:Name="CurrentBetLabel" 
                        Text="{Binding CurrentBetText}"
                        HorizontalOptions="Center"
@@ -146,9 +153,9 @@
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
                        FontSize="35"/>
-                <Button x:Name="Perk1Button" Text="temp" IsEnabled="{Binding IsPerkOneEnabled}"/>
-                <Button x:Name="Perk2Button" Text="temp" IsEnabled="{Binding IsPerkTwoEnabled}"/>
-                <Button x:Name="Perk3Button" Text="temp" IsEnabled="{Binding IsPerkThreeEnabled}"/>
+                <Button x:Name="Perk1Button" Text="temp" IsEnabled="{Binding IsPerkOneEnabled}" BackgroundColor="{Binding IsPerkOneEnabledIndicator}"/>
+                <Button x:Name="Perk2Button" Text="temp" IsEnabled="{Binding IsPerkTwoEnabled}" BackgroundColor="{Binding IsPerkTwoEnabledIndicator}"/>
+                <Button x:Name="Perk3Button" Text="temp" IsEnabled="{Binding IsPerkThreeEnabled}" BackgroundColor="{Binding IsPerkThreeEnabledIndicator}"/>
             </VerticalStackLayout>
         </Frame>
 
@@ -214,12 +221,14 @@
                 Text="HIT" 
                 HorizontalOptions="FillAndExpand" 
                 Command="{Binding HitCommand}" 
-                IsEnabled="{Binding IsHitEnabled}"/>
+                IsEnabled="{Binding IsHitEnabled}"
+                BackgroundColor="{Binding IsPlayerActionEnabledIndicator}"/>
         <Button x:Name="StayButton" Grid.Row="1" Grid.Column="3" 
                 Text="STAY" 
                 HorizontalOptions="FillAndExpand" 
                 Command="{Binding StayCommand}" 
-                IsEnabled="{Binding IsStayEnabled}"/>
+                IsEnabled="{Binding IsStayEnabled}"
+                BackgroundColor="{Binding IsPlayerActionEnabledIndicator}"/>
 
     </Grid>
 </ContentPage>

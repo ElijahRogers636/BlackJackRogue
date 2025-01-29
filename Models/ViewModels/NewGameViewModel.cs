@@ -58,6 +58,14 @@ namespace BlackJackRogue.Models.ViewModels
             IsPerkOneEnabled = false;
             IsPerkTwoEnabled = false;
             IsPerkThreeEnabled = false;
+
+            // Initial Button Indicators
+            IsPlayerActionEnabledIndicator = "#99900000";
+            IsPlaceBetEnabledIndicator = "Black";
+            IsResetGameEnabledIndicator = "#99900000";
+            IsPerkOneEnabledIndicator = "#99900000";
+            IsPerkTwoEnabledIndicator = "#99900000";
+            IsPerkThreeEnabledIndicator = "#99900000";
         }
 
         // <---------------------------------------Player Properties---------------------------------------------->
@@ -106,24 +114,36 @@ namespace BlackJackRogue.Models.ViewModels
 
         [ObservableProperty]
         private bool isHitEnabled;
+        [ObservableProperty]
+        private string isPlayerActionEnabledIndicator;
 
         [ObservableProperty]
         private bool isStayEnabled;
 
         [ObservableProperty]
         private bool isPlaceBetEnabled;
+        [ObservableProperty]
+        private string isPlaceBetEnabledIndicator;
 
         [ObservableProperty]
         private bool isResetGameEnabled;
+        [ObservableProperty]
+        private string isResetGameEnabledIndicator;
 
         [ObservableProperty]
         private bool isPerkOneEnabled;
+        [ObservableProperty]
+        private string isPerkOneEnabledIndicator;
 
         [ObservableProperty]
         private bool isPerkTwoEnabled;
+        [ObservableProperty]
+        private string isPerkTwoEnabledIndicator;
 
         [ObservableProperty]
         private bool isPerkThreeEnabled;
+        [ObservableProperty]
+        private string isPerkThreeEnabledIndicator;
 
         // <---------------------------------------Commands---------------------------------------------->
 
@@ -169,10 +189,16 @@ namespace BlackJackRogue.Models.ViewModels
             //Enable Hit and Stay buttons, enable perk buttons, disable Place Bet button
             IsHitEnabled = true;
             IsStayEnabled = true;
+            IsPlayerActionEnabledIndicator = "Black";
             IsPerkOneEnabled = true;
+            IsPerkOneEnabledIndicator = "Black";
             IsPerkTwoEnabled = true;
+            IsPerkTwoEnabledIndicator = "Black";
             IsPerkThreeEnabled = true;
+            IsPerkThreeEnabledIndicator = "Black";
             IsPlaceBetEnabled = false;
+            IsPlaceBetEnabledIndicator = "#99900000";
+
         }
 
         // Shuffle Deck Command
@@ -202,10 +228,15 @@ namespace BlackJackRogue.Models.ViewModels
                 //Disable Hit and Stay buttons, disable perk buttons, enable Reset Game button
                 IsHitEnabled = false;
                 IsStayEnabled = false;
+                IsPlayerActionEnabledIndicator = "#99900000";
                 IsPerkOneEnabled = false;
+                IsPerkOneEnabledIndicator = "#99900000";
                 IsPerkTwoEnabled = false;
+                IsPerkTwoEnabledIndicator = "#99900000";
                 IsPerkThreeEnabled = false;
+                IsPerkThreeEnabledIndicator = "#99900000";
                 IsResetGameEnabled = true;
+                IsResetGameEnabledIndicator = "Black";
                 PlayerBustUpdate();
             }
         }
@@ -217,10 +248,15 @@ namespace BlackJackRogue.Models.ViewModels
             //Disable Hit and Stay buttons, disable perk buttons, enable Reset Game button
             IsHitEnabled = false;
             IsStayEnabled = false;
+            IsPlayerActionEnabledIndicator = "#99900000";
             IsPerkOneEnabled = false;
+            IsPerkOneEnabledIndicator = "#99900000";
             IsPerkTwoEnabled = false;
+            IsPerkTwoEnabledIndicator = "#99900000";
             IsPerkThreeEnabled = false;
+            IsPerkThreeEnabledIndicator = "#99900000";
             IsResetGameEnabled = true;
+            IsResetGameEnabledIndicator = "Black";
 
             DealerCurrentCards.RemoveAt(0); // Remove the back card
             DealerCurrentCards.Add(HiddenCard); // Add the hidden card
@@ -267,7 +303,9 @@ namespace BlackJackRogue.Models.ViewModels
 
             // Enable Place Bet button and disable Reset Game buttons
             IsPlaceBetEnabled = true;
+            IsPlaceBetEnabledIndicator = "Black";
             IsResetGameEnabled = false;
+            IsResetGameEnabledIndicator = "#99900000";
         }
 
         // <---------------------------------------Methods---------------------------------------------->
@@ -294,7 +332,7 @@ namespace BlackJackRogue.Models.ViewModels
 
         }
 
-        // Update Card Value Sum, modify for Aces
+        // Update Player Card Value Sum, modify for Aces
         private void UpdatePlayerCardValueSum()
         {
             int tempSum = 0;
