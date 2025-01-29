@@ -400,12 +400,7 @@ namespace BlackJackRogue.Models.ViewModels
             GameDealer.CurrHealthPoints -= GamePlayer.CurrentBet;
 
             // Update ViewModel properties
-            PlayerHealthPoints = GamePlayer.CurrHealthPoints;
-            DealerHealthPoints = GameDealer.CurrHealthPoints;
-            PlayerHealthBar = GamePlayer.HealthBar;
-            DealerHealthBar = GameDealer.HealthBar;
-            PlayerHealthBarText = $"{PlayerHealthPoints} / {GamePlayer.TotalHealthPoints}";
-            DealerHealthBarText = $"{DealerHealthPoints} / {GameDealer.TotalHealthPoints}";
+            UpdateViewModelProperties();
 
         }
 
@@ -419,14 +414,21 @@ namespace BlackJackRogue.Models.ViewModels
             GamePlayer.CurrHealthPoints -= GamePlayer.CurrentBet;
 
             // Update ViewModel properties
+            UpdateViewModelProperties();
+
+        }
+
+        // Update ViewModel properties
+        private void UpdateViewModelProperties()
+        {
             PlayerHealthPoints = GamePlayer.CurrHealthPoints;
             DealerHealthPoints = GameDealer.CurrHealthPoints;
             PlayerHealthBar = GamePlayer.HealthBar;
             DealerHealthBar = GameDealer.HealthBar;
             PlayerHealthBarText = $"{PlayerHealthPoints} / {GamePlayer.TotalHealthPoints}";
             DealerHealthBarText = $"{DealerHealthPoints} / {GameDealer.TotalHealthPoints}";
-
         }
+
         // Decides the outcome of match and call bust methods to adjust health values
         private void DecideEndOutcome()
         {
