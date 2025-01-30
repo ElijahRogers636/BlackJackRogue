@@ -153,9 +153,9 @@
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
                        FontSize="35"/>
-                <Button x:Name="Perk1Button" Text="temp" IsEnabled="{Binding IsPerkOneEnabled}" BackgroundColor="{Binding IsPerkOneEnabledIndicator}"/>
-                <Button x:Name="Perk2Button" Text="temp" IsEnabled="{Binding IsPerkTwoEnabled}" BackgroundColor="{Binding IsPerkTwoEnabledIndicator}"/>
-                <Button x:Name="Perk3Button" Text="temp" IsEnabled="{Binding IsPerkThreeEnabled}" BackgroundColor="{Binding IsPerkThreeEnabledIndicator}"/>
+                <Button x:Name="Perk1Button" Text="ReDraw" IsEnabled="{Binding IsPerkOneEnabled}" BackgroundColor="{Binding IsPerkOneEnabledIndicator}" Command="{Binding PerkOneCommand}"/>
+                <Button x:Name="Perk2Button" Text="100 Dealer DMG" IsEnabled="{Binding IsPerkTwoEnabled}" BackgroundColor="{Binding IsPerkTwoEnabledIndicator}" Command="{Binding PerkTwoCommand}"/>
+                <Button x:Name="Perk3Button" Text="100 Player HP" IsEnabled="{Binding IsPerkThreeEnabled}" BackgroundColor="{Binding IsPerkThreeEnabledIndicator}" Command="{Binding PerkThreeCommand}"/>
             </VerticalStackLayout>
         </Frame>
 

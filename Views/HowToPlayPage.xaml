@@ -1,49 +1,167 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BlackJackRogue.Views.HowToPlayPage">
+             xmlns:models="clr-namespace:BlackJackRogue.Models"
+             x:Class="BlackJackRogue.Views.HowToPlayPage"
+             BackgroundImageSource="framebackground.png"
+             x:DataType="models:HowtoPlay">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Define a style for buttons -->
+            <Style TargetType="Button">
+                <Setter Property="BorderColor" Value="DarkRed"/>
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="DarkRed" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+            <!-- Define a style for entry boxes -->
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+            <!-- Define a style for frames -->
+            <Style TargetType="Frame">
+                <Setter Property="BorderColor" Value="DarkRed" />
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Padding" Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ScrollView>
         <VerticalStackLayout VerticalOptions="Center" Margin="30">
-            <Label 
-                Text="HOW TO PLAY"
-                TextColor="DarkRed"
-                FontSize="40"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-            <Label 
-                Text="GAMEPLAY LOOP"
-                TextColor="Aqua"
-                FontSize="30"
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand" 
-                Margin="40,0,0,0"/>
-            <Label 
-                Text="BETTING"
-                TextColor="Aqua"
-                FontSize="30"
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand" 
-                Margin="40,0,0,0"/>
-            <Label 
-                Text="PLAYER TURN"
-                TextColor="Aqua"
-                FontSize="30"
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand" 
-                Margin="40,0,0,0"/>
-            <Label 
-                Text="DEALER TURN"
-                TextColor="Aqua"
-                FontSize="30"
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand" 
-                Margin="40,0,0,0"/>
-            <Label 
-                Text="PERKS"
-                TextColor="DarkRed"
-                FontSize="40"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+            <Frame>
+                <VerticalStackLayout>
+                    <Label 
+                        Text="HOW TO PLAY"
+                        TextColor="DarkRed"
+                        FontSize="40"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" />
+                    <Label 
+                        Text="GAMEPLAY LOOP"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding GamePlayLoop}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="BETTING"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding Betting}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="PLAYER TURN"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding PlayerTurn}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="DEALER TURN"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding DealerTurn}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame>
+                <VerticalStackLayout>
+                    
+                    <Label 
+                        Text="PERKS"
+                        TextColor="DarkRed"
+                        FontSize="40"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" />
+                    <Label 
+                        Text="REDRAW CARD"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding ReDraw}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="ADD 100 HP TO PLAYER"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding Add100PlayerHp}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="100 DMG TO DEALER"
+                        TextColor="DarkRed"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                    <Label 
+                        Text="{Binding Deal100DMGDealer}"
+                        TextColor="GhostWhite"
+                        FontSize="30"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="StartAndExpand" 
+                        Margin="40,0,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

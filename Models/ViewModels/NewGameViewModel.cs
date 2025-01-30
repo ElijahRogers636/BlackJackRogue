@@ -69,6 +69,10 @@ namespace BlackJackRogue.Models.ViewModels
         }
 
         // <---------------------------------------Player Properties---------------------------------------------->
+        // Perks should only be enabled once per game
+        private bool firstPerkOneUsage = true;
+        private bool firstPerkTwoUsage = true;
+        private bool firstPerkThreeUsage = true;
 
         [ObservableProperty]
         private int playerHealthPoints;
@@ -190,14 +194,24 @@ namespace BlackJackRogue.Models.ViewModels
             IsHitEnabled = true;
             IsStayEnabled = true;
             IsPlayerActionEnabledIndicator = "Black";
-            IsPerkOneEnabled = true;
-            IsPerkOneEnabledIndicator = "Black";
-            IsPerkTwoEnabled = true;
-            IsPerkTwoEnabledIndicator = "Black";
-            IsPerkThreeEnabled = true;
-            IsPerkThreeEnabledIndicator = "Black";
             IsPlaceBetEnabled = false;
             IsPlaceBetEnabledIndicator = "#99900000";
+            // Perks Should only be used once per game
+            if (firstPerkOneUsage)
+            {
+                IsPerkOneEnabled = true;
+                IsPerkOneEnabledIndicator = "Black";
+            }
+            if (firstPerkTwoUsage)
+            {
+                IsPerkTwoEnabled = true;
+                IsPerkTwoEnabledIndicator = "Black";
+            }
+            if (firstPerkThreeUsage)
+            {
+                IsPerkThreeEnabled = true;
+                IsPerkThreeEnabledIndicator = "Black";
+            }
 
         }
 
@@ -222,23 +236,7 @@ namespace BlackJackRogue.Models.ViewModels
                 CurrentBetText = "Not enough cards to draw.";
             }
 
-            // Check if player busts
-            if (PlayerCurrentCardValueSum > 21)
-            {
-                //Disable Hit and Stay buttons, disable perk buttons, enable Reset Game button
-                IsHitEnabled = false;
-                IsStayEnabled = false;
-                IsPlayerActionEnabledIndicator = "#99900000";
-                IsPerkOneEnabled = false;
-                IsPerkOneEnabledIndicator = "#99900000";
-                IsPerkTwoEnabled = false;
-                IsPerkTwoEnabledIndicator = "#99900000";
-                IsPerkThreeEnabled = false;
-                IsPerkThreeEnabledIndicator = "#99900000";
-                IsResetGameEnabled = true;
-                IsResetGameEnabledIndicator = "Black";
-                PlayerBustUpdate();
-            }
+            PlayerBustCheck();
         }
 
         // Stay Command
@@ -275,15 +273,7 @@ namespace BlackJackRogue.Models.ViewModels
                 }
             }
 
-            // Check if dealer busts
-            if (DealerCurrentCardValueSum > 21)
-            {
-                DealerBustUpdate();
-            }
-            else
-            {
-                DecideEndOutcome();
-            }
+            DealerBustCheck();
         }
 
         // Reset Game Command
@@ -306,6 +296,44 @@ namespace BlackJackRogue.Models.ViewModels
             IsPlaceBetEnabledIndicator = "Black";
             IsResetGameEnabled = false;
             IsResetGameEnabledIndicator = "#99900000";
+        }
+
+        // Perk One Command
+        [RelayCommand]
+        private void PerkOne()
+        {
+            // Redraw the last card drawn by the player
+            Perks.RedrawCard(GamePlayer, GameDeck);
+            PlayerBustCheck();
+            UpdateViewModelProperties();
+            IsPerkOneEnabled = false;
+            IsPerkOneEnabledIndicator = "#99900000";
+            firstPerkOneUsage = false;
+        }
+
+        // Perk Two Command
+        [RelayCommand]
+        private void PerkTwo()
+        {
+            // Decrease dealer health by 100
+            Perks.RemoveDealerHealth(GameDealer);
+            UpdateViewModelProperties();
+            IsPerkTwoEnabled = false;
+            IsPerkTwoEnabledIndicator = "#99900000";
+            firstPerkTwoUsage = false;
+
+        }
+
+        // Perk Three Command
+        [RelayCommand]
+        private void PerkThree()
+        {
+            // Increase player health by 100
+            Perks.AddPlayerHealth(GamePlayer);
+            UpdateViewModelProperties();
+            IsPerkThreeEnabled = false;
+            IsPerkThreeEnabledIndicator = "#99900000";
+            firstPerkThreeUsage = false;
         }
 
         // <---------------------------------------Methods---------------------------------------------->
@@ -401,13 +429,14 @@ namespace BlackJackRogue.Models.ViewModels
 
             // Update ViewModel properties
             UpdateViewModelProperties();
+            CheckGameResult();
 
         }
 
         // Updates dealer and player health values incase of a player bust
         private void PlayerBustUpdate()
         {
-            CurrentBetText = "Player Bust! Player Wins!";
+            CurrentBetText = "Player Bust! Dealer Wins!";
             // Player wins: increase health by 1.5x of bet up to total health value
             GameDealer.CurrHealthPoints = Math.Min(GameDealer.TotalHealthPoints, GameDealer.CurrHealthPoints + (int)(GamePlayer.CurrentBet * 1.5));
             // Reduce dealer health by 1x bet value
@@ -415,6 +444,7 @@ namespace BlackJackRogue.Models.ViewModels
 
             // Update ViewModel properties
             UpdateViewModelProperties();
+            CheckGameResult();
 
         }
 
@@ -427,6 +457,41 @@ namespace BlackJackRogue.Models.ViewModels
             DealerHealthBar = GameDealer.HealthBar;
             PlayerHealthBarText = $"{PlayerHealthPoints} / {GamePlayer.TotalHealthPoints}";
             DealerHealthBarText = $"{DealerHealthPoints} / {GameDealer.TotalHealthPoints}";
+        }
+
+        // Checks for dealer and palyer busts over 21
+        private void DealerBustCheck()
+        {
+            // Check if dealer busts
+            if (DealerCurrentCardValueSum > 21)
+            {
+                DealerBustUpdate();
+            }
+            else
+            {
+                DecideEndOutcome();
+            }
+        }
+
+        private void PlayerBustCheck()
+        {
+            // Check if player busts
+            if (PlayerCurrentCardValueSum > 21)
+            {
+                //Disable Hit and Stay buttons, disable perk buttons, enable Reset Game button
+                IsHitEnabled = false;
+                IsStayEnabled = false;
+                IsPlayerActionEnabledIndicator = "#99900000";
+                IsPerkOneEnabled = false;
+                IsPerkOneEnabledIndicator = "#99900000";
+                IsPerkTwoEnabled = false;
+                IsPerkTwoEnabledIndicator = "#99900000";
+                IsPerkThreeEnabled = false;
+                IsPerkThreeEnabledIndicator = "#99900000";
+                IsResetGameEnabled = true;
+                IsResetGameEnabledIndicator = "Black";
+                PlayerBustUpdate();
+            }
         }
 
         // Decides the outcome of match and call bust methods to adjust health values
@@ -452,6 +517,22 @@ namespace BlackJackRogue.Models.ViewModels
             else
             {
                 CurrentBetText = "Round Tie!";
+            }
+            CheckGameResult();
+        }
+
+        // Check Game Result message
+        private async void CheckGameResult()
+        {
+            if (GamePlayer.CurrHealthPoints <= 0)
+            {
+                await Shell.Current.DisplayAlert("Game Over", "You have lost the game!", "OK");
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+            else if (GameDealer.CurrHealthPoints <= 0)
+            {
+                await Shell.Current.DisplayAlert("Congratulations", "You have won the game!", "OK");
+                await Shell.Current.GoToAsync("//MainPage");
             }
         }
     }
