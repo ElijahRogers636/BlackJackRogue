@@ -9,8 +9,8 @@ namespace BlackJackRogue.Models
 {
     public class Player : Hand
     {
-        public ObservableCollection<Perks> Perks = new ObservableCollection<Perks>();
-        
-        public int CurrentBet { get; set; }
+        public ObservableCollection<Perks> Perks { get; set; } = new ObservableCollection<Perks>();
+        public int CurrentBet { get; set; } = 0;
+        public string CurrentBetText => $"CURRENT BET: {CurrentBet}";
     }
 }

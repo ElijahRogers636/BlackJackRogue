@@ -14,5 +14,6 @@ namespace BlackJackRogue.Models
         public int CurrHealthPoints { get; set; }
         public int TotalHealthPoints { get; set; }
         public double HealthBar => (double)CurrHealthPoints / TotalHealthPoints;
+        public string HealthBarText => $"{CurrHealthPoints} / {TotalHealthPoints}";
     }
 }

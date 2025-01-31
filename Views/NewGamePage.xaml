@@ -64,7 +64,7 @@
                        VerticalOptions="Center" 
                        FontSize="24"/>
                 <ProgressBar x:Name="DealerHealthBar" 
-                             Progress="{Binding DealerHealthBar}" 
+                             Progress="{Binding GameDealer.DealerHealthBar}" 
                              HorizontalOptions="FillAndExpand" 
                              VerticalOptions="Center" 
                              HeightRequest="20"
@@ -72,7 +72,7 @@
                              BackgroundColor="LightGray" 
                              ProgressColor="DarkRed"/>
                 <Label x:Name="DealerHealthTotalLabel"
-                       Text="{Binding DealerHealthBarText}"
+                       Text="{Binding GameDealer.DealerHealthBarText}"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30"/>
@@ -82,8 +82,8 @@
         <!-- Player and Dealer card value totals row 1 column 0-->
         <Frame Grid.Row="1" Grid.Column="0">
             <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Center">
-                <Label Text="{Binding DealerCurrentCardValueSum, StringFormat='DEALER TOTAL: {0}'}" HorizontalOptions="StartAndExpand" FontSize="25" Margin="8"/>
-                <Label Text="{Binding PlayerCurrentCardValueSum, StringFormat='PLAYER TOTAL: {0}'}" HorizontalOptions="StartAndExpand" FontSize="25" Margin="8"/>
+                <Label Text="{Binding GameDealer.DealerCurrentCardValueSum, StringFormat='DEALER TOTAL: {0}'}" HorizontalOptions="StartAndExpand" FontSize="25" Margin="8"/>
+                <Label Text="{Binding GamePlayer.PlayerCurrentCardValueSum, StringFormat='PLAYER TOTAL: {0}'}" HorizontalOptions="StartAndExpand" FontSize="25" Margin="8"/>
             </VerticalStackLayout>
         </Frame>
         
@@ -100,8 +100,8 @@
             <Button Text="NEXT ROUND" 
                     Margin="25" 
                     Command="{Binding ResetGameCommand}" 
-                    IsEnabled="{Binding IsResetGameEnabled}"
-                    BackgroundColor="{Binding IsResetGameEnabledIndicator}"/>
+                    IsEnabled="{Binding GameButtonState.IsResetGameEnabled}"
+                    BackgroundColor="{Binding GameButtonState.IsResetGameEnabledIndicator}"/>
         </Frame>
 
         <!-- Entry box and button in the center of column 1, row 1 for placeing bets-->
@@ -110,14 +110,14 @@
                 <Entry x:Name="BettingEntryBox" 
                        Placeholder="Enter your bet" 
                        PlaceholderColor="DarkRed"
-                       Text="{Binding PlayerCurrentBet, Mode=TwoWay}"
+                       Text="{Binding GamePlayer.PlayerCurrentBet, Mode=TwoWay}"
                        Keyboard="Numeric" />
                 <Button Text="PLACE BET" 
                         Command="{Binding PlaceBetCommand}" 
-                        IsEnabled="{Binding IsPlaceBetEnabled}" 
-                        BackgroundColor="{Binding IsPlaceBetEnabledIndicator}"/>
+                        IsEnabled="{Binding GameButtonState.IsPlaceBetEnabled}" 
+                        BackgroundColor="{Binding GameButtonState.IsPlaceBetEnabledIndicator}"/>
                 <Label x:Name="CurrentBetLabel" 
-                       Text="{Binding CurrentBetText}"
+                       Text="{Binding GamePlayer.CurrentBetText}"
                        HorizontalOptions="Center"
                        FontSize="12"/>
             </VerticalStackLayout>
@@ -131,7 +131,7 @@
                        VerticalOptions="Center" 
                        FontSize="24"/>
                 <ProgressBar x:Name="PlayerHealthBar" 
-                             Progress="{Binding PlayerHealthBar}" 
+                             Progress="{Binding GamePlayer.PlayerHealthBar}" 
                              HorizontalOptions="FillAndExpand" 
                              VerticalOptions="Center" 
                              HeightRequest="20"
@@ -139,7 +139,7 @@
                              BackgroundColor="LightGray" 
                              ProgressColor="DarkRed"/>
                 <Label x:Name="PlayerHealthTotalLabel"
-                       Text="{Binding PlayerHealthBarText}"
+                       Text="{Binding GamePlayer.PlayerHealthBarText}"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontSize="30" />
@@ -153,19 +153,19 @@
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
                        FontSize="35"/>
-                <Button x:Name="Perk1Button" Text="ReDraw" IsEnabled="{Binding IsPerkOneEnabled}" BackgroundColor="{Binding IsPerkOneEnabledIndicator}" Command="{Binding PerkOneCommand}"/>
-                <Button x:Name="Perk2Button" Text="100 Dealer DMG" IsEnabled="{Binding IsPerkTwoEnabled}" BackgroundColor="{Binding IsPerkTwoEnabledIndicator}" Command="{Binding PerkTwoCommand}"/>
-                <Button x:Name="Perk3Button" Text="100 Player HP" IsEnabled="{Binding IsPerkThreeEnabled}" BackgroundColor="{Binding IsPerkThreeEnabledIndicator}" Command="{Binding PerkThreeCommand}"/>
+                <Button x:Name="Perk1Button" Text="ReDraw" IsEnabled="{Binding GameButtonState.IsPerkOneEnabled}" BackgroundColor="{Binding GameButtonState.IsPerkOneEnabledIndicator}" />
+                <Button x:Name="Perk2Button" Text="100 Dealer DMG" IsEnabled="{Binding GameButtonState.IsPerkTwoEnabled}" BackgroundColor="{Binding GameButtonState.IsPerkTwoEnabledIndicator}" />
+                <Button x:Name="Perk3Button" Text="100 Player HP" IsEnabled="{Binding GameButtonState.IsPerkThreeEnabled}" BackgroundColor="{Binding GameButtonState.IsPerkThreeEnabledIndicator}" />
             </VerticalStackLayout>
         </Frame>
 
         <!-- Dealer Hand grid row 0 column 1 -->
         <Frame Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
             <VerticalStackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text="{Binding GameDealer.Name}"
+                <Label Text="{Binding GameDealer.DealerName}"
                        FontSize="24" 
                        HorizontalOptions="Center"/>
-                <CollectionView ItemsSource="{Binding DealerCurrentCards}" 
+                <CollectionView ItemsSource="{Binding GameDealer.DealerCurrentCards}" 
                                 ItemsLayout="HorizontalList"
                                 HorizontalScrollBarVisibility="Always"
                                 Margin="0,15">
@@ -193,7 +193,7 @@
                 <Label Text="PLAYER HAND"
                        FontSize="24" 
                        HorizontalOptions="Center"/>
-                <CollectionView ItemsSource="{Binding PlayerCurrentCards}" 
+                <CollectionView ItemsSource="{Binding GamePlayer.PlayerCurrentCards}" 
                                 ItemsLayout="HorizontalList"
                                 HorizontalScrollBarVisibility="Always" 
                                 Margin="0,15">
@@ -221,14 +221,14 @@
                 Text="HIT" 
                 HorizontalOptions="FillAndExpand" 
                 Command="{Binding HitCommand}" 
-                IsEnabled="{Binding IsHitEnabled}"
-                BackgroundColor="{Binding IsPlayerActionEnabledIndicator}"/>
+                IsEnabled="{Binding GameButtonState.IsHitEnabled}"
+                BackgroundColor="{Binding GameButtonState.IsPlayerActionEnabledIndicator}"/>
         <Button x:Name="StayButton" Grid.Row="1" Grid.Column="3" 
                 Text="STAY" 
                 HorizontalOptions="FillAndExpand" 
                 Command="{Binding StayCommand}" 
-                IsEnabled="{Binding IsStayEnabled}"
-                BackgroundColor="{Binding IsPlayerActionEnabledIndicator}"/>
+                IsEnabled="{Binding GameButtonState.IsStayEnabled}"
+                BackgroundColor="{Binding GameButtonState.IsPlayerActionEnabledIndicator}"/>
 
     </Grid>
 </ContentPage>
