@@ -124,5 +124,29 @@ namespace BlackJackRogue.Models.ViewModels
             }
 
         }
+
+        public void UpdatePerkOneButtonPressStates()
+        {
+            //Disable Perk One button
+            IsPerkOneEnabled = false;
+            IsPerkOneEnabledIndicator = "#99900000";
+            FirstPerkUsage = false;
+        }
+
+        public void UpdatePerkTwoButtonPressStates()
+        {
+            //Disable Perk One button
+            IsPerkTwoEnabled = false;
+            IsPerkTwoEnabledIndicator = "#99900000";
+            SecondPerkUsage = false;
+        }
+
+        public void UpdatePerkThreeButtonPressStates()
+        {
+            //Disable Perk One button
+            IsPerkThreeEnabled = false;
+            IsPerkThreeEnabledIndicator = "#99900000";
+            ThirdPerkUsage = false;
+        }
     }
 }

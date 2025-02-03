@@ -144,6 +144,31 @@ namespace BlackJackRogue.Models.ViewModels
             GameButtonState.UpdateResetButtonPressStates();
         }
 
+        // Perk Commands
+        [RelayCommand]
+        private void PerkOne()
+        {
+            Perks.RedrawCard(GamePlayer, GameDeck);
+            PlayerBustCheck();
+            GameButtonState.UpdatePerkOneButtonPressStates();
+
+        }
+        [RelayCommand]
+        private void PerkTwo()
+        {
+            Perks.RemoveDealerHealth(GameDealer);
+            DealerBustCheck();
+            GameButtonState.UpdatePerkTwoButtonPressStates();
+            CheckGameResult();
+
+        }
+        [RelayCommand]
+        private void PerkThree()
+        {
+            Perks.AddPlayerHealth(GamePlayer);
+            GameButtonState.UpdatePerkThreeButtonPressStates();
+        }
+
         // <---------------------------------------Methods---------------------------------------------->
 
         // Deal Initial Cards Method
@@ -206,7 +231,7 @@ namespace BlackJackRogue.Models.ViewModels
             {
                 DealerBustUpdate();
             }
-            else
+            else if (GameDealer.DealerCurrentCardValueSum > 16 && GameDealer.DealerCurrentCardValueSum < 22)
             {
                 DecideEndOutcome();
             }

@@ -153,9 +153,21 @@
                        HorizontalOptions="Center" 
                        VerticalOptions="Center" 
                        FontSize="35"/>
-                <Button x:Name="Perk1Button" Text="ReDraw" IsEnabled="{Binding GameButtonState.IsPerkOneEnabled}" BackgroundColor="{Binding GameButtonState.IsPerkOneEnabledIndicator}" />
-                <Button x:Name="Perk2Button" Text="100 Dealer DMG" IsEnabled="{Binding GameButtonState.IsPerkTwoEnabled}" BackgroundColor="{Binding GameButtonState.IsPerkTwoEnabledIndicator}" />
-                <Button x:Name="Perk3Button" Text="100 Player HP" IsEnabled="{Binding GameButtonState.IsPerkThreeEnabled}" BackgroundColor="{Binding GameButtonState.IsPerkThreeEnabledIndicator}" />
+                <Button x:Name="Perk1Button" 
+                        Text="ReDraw" 
+                        IsEnabled="{Binding GameButtonState.IsPerkOneEnabled}" 
+                        BackgroundColor="{Binding GameButtonState.IsPerkOneEnabledIndicator}" 
+                        Command="{Binding PerkOneCommand}"/>
+                <Button x:Name="Perk2Button" 
+                        Text="100 Dealer DMG" 
+                        IsEnabled="{Binding GameButtonState.IsPerkTwoEnabled}" 
+                        BackgroundColor="{Binding GameButtonState.IsPerkTwoEnabledIndicator}" 
+                        Command="{Binding PerkTwoCommand}"/>
+                <Button x:Name="Perk3Button" 
+                        Text="100 Player HP" 
+                        IsEnabled="{Binding GameButtonState.IsPerkThreeEnabled}" 
+                        BackgroundColor="{Binding GameButtonState.IsPerkThreeEnabledIndicator}" 
+                        Command="{Binding PerkThreeCommand}"/>
             </VerticalStackLayout>
         </Frame>
 

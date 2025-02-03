@@ -14,37 +14,39 @@ namespace BlackJackRogue.Models
         // Perk Methods
 
         //Redraws the last card drawn by the player
-        public static void RedrawCard(Player player, Deck deck)
+        public static void RedrawCard(PlayerViewModel player, Deck deck)
         {
-            player.CurrentCards.RemoveAt(player.CurrentCards.Count - 1);
-            player.CurrentCards.Add(deck.ShuffledCardDeck.Pop());
+            player.PlayerCurrentCards.RemoveAt(player.PlayerCurrentCards.Count - 1);
+            player.PlayerCurrentCards.Add(deck.ShuffledCardDeck.Pop());
+            player.UpdatePlayerProperties();
         }
 
         // Decreases dealer health by 100
-        public static void RemoveDealerHealth(Dealer dealer)
+        public static void RemoveDealerHealth(DealerViewModel dealer)
         {
-            if(dealer.CurrHealthPoints >= 100)
+            if(dealer.DealerCurrHealthPoints >= 100)
             {
-                dealer.CurrHealthPoints -= 100;
+                dealer.DealerCurrHealthPoints -= 100;
             }
             else
             {
-                dealer.CurrHealthPoints = 0;
+                dealer.DealerCurrHealthPoints = 0;
             }
-             
+            dealer.UpdateDealerProperties();
         }
 
         // Increases player health by 100
-        public static void AddPlayerHealth(Player player)
+        public static void AddPlayerHealth(PlayerViewModel player)
         {
-            if (player.CurrHealthPoints <= 900)
+            if (player.PlayerCurrHealthPoints <= 900)
             {
-                player.CurrHealthPoints += 100;
+                player.PlayerCurrHealthPoints += 100;
             }
             else
             {
-                player.CurrHealthPoints = 1000;
+                player.PlayerCurrHealthPoints = 1000;
             }
+            player.UpdatePlayerProperties();
         }
 
     }

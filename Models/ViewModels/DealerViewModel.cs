@@ -14,7 +14,7 @@ namespace BlackJackRogue.Models.ViewModels
             dealer = new Dealer()
             {
                 Name = "FIRST DEALER",
-                CurrHealthPoints = 1000,
+                CurrHealthPoints = 100,
                 TotalHealthPoints = 1000,
                 CurrentCards = new ObservableCollection<Card>(),
                 CardValueSum = 0
